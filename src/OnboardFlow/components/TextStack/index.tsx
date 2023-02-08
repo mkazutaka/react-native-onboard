@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import { TextStyles } from '../../types'
 import {
     COLOR_MUTED_TEXT_DEFAULT,
@@ -7,11 +7,15 @@ import {
     TEXT_ALIGN_DEFAULT,
     VERTICAL_PADDING_SMALL_DEFAULT,
 } from '../../constants'
+import RenderHtml, {HTMLSource} from 'react-native-render-html';
+import { useWindowDimensions } from 'react-native';
 
 export interface TextStackProps {
-    subtitle?: string
-    title?: string
+    subtitle?: HTMLSource
+    title?: HTMLSource
 }
+
+const { width: WIDTH, height: HEIGHT } = Dimensions.get('window')
 
 export const TextStack: FC<TextStackProps & TextStyles> = ({
     title,
@@ -24,32 +28,18 @@ export const TextStack: FC<TextStackProps & TextStyles> = ({
 }) => {
     return (
         <View>
-            <Text
-                style={[
-                    styles.title,
-                    {
-                        color: COLOR_TEXT_DEFAULT,
-                        marginBottom: VERTICAL_PADDING_SMALL_DEFAULT,
-                        textAlign: textAlign,
-                    },
-                    titleStyle,
-                ]}
-            >
-                {title}
-            </Text>
-            <Text
-                style={[
-                    styles.subtitle,
-                    {
-                        color: COLOR_MUTED_TEXT_DEFAULT,
-                        textAlign: TEXT_ALIGN_DEFAULT,
-                    },
-                    { textAlign: textAlign },
-                    subtitleStyle,
-                ]}
-            >
-                {subtitle}
-            </Text>
+          {title ? (
+            <RenderHtml
+              contentWidth={WIDTH}
+              source={title}
+            />
+          ) : null}
+          {subtitle ? (
+            <RenderHtml
+              contentWidth={WIDTH}
+              source={subtitle}
+            />
+          ) : null}
         </View>
     )
 }

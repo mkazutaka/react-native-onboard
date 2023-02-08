@@ -4,6 +4,7 @@ import { FormElementTypesConfig, OnboardPageTypesConfig, PageType } from '../ind
 import { FooterProps } from '../Footer'
 import { PrimaryButtonProps } from '../components/PrimaryButton'
 import { SecondaryButtonProps } from '../components/SecondaryButton'
+import {HTMLSource} from "react-native-render-html";
 
 /* A FlowItem represents a single element in multiple types of Flows
   Generally, there is a title, subtitle, and image that the component will
@@ -12,8 +13,8 @@ import { SecondaryButtonProps } from '../components/SecondaryButton'
 export interface FlowItemData {
   id?: string
   imageUri?: string
-  subtitle?: string
-  title?: string
+  subtitle?: HTMLSource
+  title?: HTMLSource
   subtitleStyle?: StyleProp<TextStyle> | undefined
   titleStyle?: StyleProp<TextStyle> | undefined
 }
