@@ -80,16 +80,6 @@ export const Page: FC<PageProps & TextStyles> = ({
 
   return (
     <View style={[styles.container, style, { width: width }]} onLayout={onContainerLayout}>
-      {pageData.imageUri && (
-        <Image
-          source={{ uri: pageData.imageUri }}
-          style={{ width: 'auto', height: '50%', marginVertical: VERTICAL_PADDING_DEFAULT * 3 }}
-          resizeMode="contain"
-        />
-      )}
-      <View style={styles.imageComponentWrapper}>
-        <ImageComponent />
-      </View>
       <View style={styles.bottomContainer}>
         <View onLayout={onTextStackLayout}>
           <TextStack
@@ -101,6 +91,16 @@ export const Page: FC<PageProps & TextStyles> = ({
             subtitleStyle={subtitleStyle}
           />
         </View>
+      </View>
+      {pageData.imageUri && (
+        <Image
+          source={{ uri: pageData.imageUri }}
+          style={{ width: 'auto', height: '50%', marginVertical: VERTICAL_PADDING_DEFAULT * 3 }}
+          resizeMode="contain"
+        />
+      )}
+      <View style={styles.imageComponentWrapper}>
+        <ImageComponent />
       </View>
     </View>
   )
